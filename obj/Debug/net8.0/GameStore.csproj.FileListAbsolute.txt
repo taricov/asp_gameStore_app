@@ -26,3 +26,4 @@
 /Users/taricov/dev/GameStore/obj/Debug/net8.0/GameStore.pdb
 /Users/taricov/dev/GameStore/obj/Debug/net8.0/GameStore.genruntimeconfig.cache
 /Users/taricov/dev/GameStore/obj/Debug/net8.0/ref/GameStore.dll
+/Users/taricov/dev/GameStore/obj/Debug/net8.0/GameStore.sourcelink.json

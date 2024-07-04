@@ -1,4 +1,7 @@
 @page "/add"
+@inject NavigationManager NavigationManager
+@inject GenreClient GenreClient
+@inject GameClient GameClient
 
 <PageTitle>Add New Game</PageTitle>
 
@@ -7,7 +10,7 @@
 }else{
     
 
-<EditForm Model="@game" FormName="AddNewGame">
+<EditForm Model="@game" FormName="AddNewGame" OnSubmit="HandleSubmit">
   
   <div class="form-group">
     <label for="game_name" class="form_label">Game Name</label>
@@ -37,22 +40,30 @@
 
 
   <button type="submit" class="btn btn-primary">Submit</button>
-  <button type="button" class="btn btn-danger">Cancel</button>
+  <button
+  @* @onclick="HandleCancel" *@
+  type="button" 
+  class="btn btn-danger">Cancel</button>
 </EditForm>
 
 
 }
 @code
 {
+  [SupplyParameterFromForm]
     private GameDetails game {get; set;} = new()
     {
         Name = string.Empty,
         ReleaseDate = DateOnly.FromDateTime(DateTime.UtcNow),
     };
-    private GenreClient genreClient = new();
     private Genre[]? genres;
     protected override void OnInitialized()
     {
-         genres = genreClient.GetGenres();
+         genres = GenreClient.GetGenres();
+    }
+       private void HandleSubmit()
+    {
+      GameClient.AddGame(game);
+      NavigationManager.NavigateTo("/");
     }
 }

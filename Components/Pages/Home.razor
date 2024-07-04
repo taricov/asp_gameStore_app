@@ -1,4 +1,7 @@
 ﻿@page "/"
+@inject GameSummary Games
+@inject GameClient Client 
+
 
 <PageTitle>Home</PageTitle>
 
@@ -34,13 +37,10 @@ else
 
 }
 @code{
-    private GameClient client = new();
-    private GameSummary[]? games;
-
+  
+  private GameSummary[]? games;
     protected override void OnInitialized()
     {
-        @* base.OnInitialized(); *@
-        games = client.GetGames();
+        games = Client.GetGames();
     }
-
 }
