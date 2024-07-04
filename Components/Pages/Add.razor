@@ -7,10 +7,10 @@
 
 @if(genres is null){
     <p><em>Loading...</em></p>
-}else{
-    
-
-<EditForm Model="@game" FormName="AddNewGame" OnSubmit="HandleSubmit">
+}else{    
+  
+<EditForm Model="@game" FormName="AddNewGame" OnValidSubmit="HandleSubmit">
+  <DataAnnotationsValidator />
   
   <div class="form-group">
     <label for="game_name" class="form_label">Game Name</label>
