@@ -48,11 +48,11 @@ public class GameClient
     games.Add(newGame);
 
     }
-    public GameDetails EditGame(int id)
+    public GameDetails GetGame(int id)
     {
-        var game = games.Find(game=> game.Id == id);
+        GameSummary? game = games.Find(game=> game.Id == id);
         ArgumentNullException.ThrowIfNull(game);
-        var genre = genres.Single(genre=> string.Equals(genre.Name, game.Genre, StringComparison.OrdinalIgnoreCase));
+        var genre = genres.Single(genre=> string.Equals(genre.Name, game.Genre));
         return new GameDetails
         {
             Id = game.Id,
