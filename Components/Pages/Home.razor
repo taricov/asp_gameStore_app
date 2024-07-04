@@ -1,0 +1,46 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+@if(games is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+<table class="table table-striped table-hover">
+<thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Price</th>
+      <th scope="col">Release Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(var game in games){
+<tr>
+      <td>@game.Id</td>
+      <td>@game.Name</td>
+      <td>@game.Genre</td>
+      <td>@game.Price</td>
+      <td>@game.ReleaseDate</td>
+    </tr>
+    }
+  </tbody>
+</table>
+
+}
+@code{
+    private GameClient client = new();
+    private GameSummary[]? games;
+
+    protected override void OnInitialized()
+    {
+        @* base.OnInitialized(); *@
+        games = client.GetGames();
+    }
+
+}

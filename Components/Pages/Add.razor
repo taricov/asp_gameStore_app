@@ -1,0 +1,58 @@
+@page "/add"
+
+<PageTitle>Add New Game</PageTitle>
+
+@if(genres is null){
+    <p><em>Loading...</em></p>
+}else{
+    
+
+<EditForm Model="@game" FormName="AddNewGame">
+  
+  <div class="form-group">
+    <label for="game_name" class="form_label">Game Name</label>
+    <InputText class="form-control" id="game_name" placeholder="Type Here..." @bind-Value="game.Name" />
+  </div>
+  
+  <div class="form-group">
+    <label for="game_genre" class="form_label">Genre:</label>
+    <InputSelect class="form-select" id="game_genre" @bind-Value="game.GenreId" >
+    <option value="">---Select A Genre---</option>
+    @foreach(var genre in genres) {
+        <option value="@genre.Id">@genre.Name</option>
+    }
+    </InputSelect>
+  </div>
+
+  <div class="form-group">
+    <label for="game_price" class="form_label">Price:</label>
+    <InputNumber class="form-control" id="game_price" @bind-Value="game.Price" />
+  </div>
+  
+  <div class="form-group">
+    <label for="game_releasedate" class="form_label">Release Date:</label>
+    <InputDate class="form-control" id="game_releasedate" @bind-Value="game.ReleaseDate" />
+  </div>
+
+
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="button" class="btn btn-danger">Cancel</button>
+</EditForm>
+
+
+}
+@code
+{
+    private GameDetails game {get; set;} = new()
+    {
+        Name = string.Empty,
+        ReleaseDate = DateOnly.FromDateTime(DateTime.UtcNow),
+    };
+    private GenreClient genreClient = new();
+    private Genre[]? genres;
+    protected override void OnInitialized()
+    {
+         genres = genreClient.GetGenres();
+    }
+}
