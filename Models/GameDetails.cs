@@ -8,10 +8,9 @@ public class GameDetails
     [Required]
     [StringLength(10)]
     public required string Name { get; set;}
-    [Range(10, 100)]
+    [Range(20, 100)]
     public decimal Price { get; set;}
-    [Required]
+    [Required(ErrorMessage = "This is a custom error message.")]
     public string? GenreId { get; set;} 
     public DateOnly ReleaseDate { get; set; }    
-
 }

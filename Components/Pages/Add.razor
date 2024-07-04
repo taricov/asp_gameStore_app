@@ -15,6 +15,7 @@
   <div class="form-group">
     <label for="game_name" class="form_label">Game Name</label>
     <InputText class="form-control" id="game_name" placeholder="Type Here..." @bind-Value="game.Name" />
+    <ValidationMessage For="()=>game.Name" />
   </div>
   
   <div class="form-group">
@@ -25,11 +26,13 @@
         <option value="@genre.Id">@genre.Name</option>
     }
     </InputSelect>
+    <ValidationMessage For="()=> game.GenreId" />
   </div>
 
   <div class="form-group">
     <label for="game_price" class="form_label">Price:</label>
     <InputNumber class="form-control" id="game_price" @bind-Value="game.Price" />
+    <ValidationMessage For="()=>game.Price" />
   </div>
   
   <div class="form-group">
