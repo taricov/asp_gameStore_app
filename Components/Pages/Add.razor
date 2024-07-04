@@ -4,12 +4,12 @@
 @inject GenreClient GenreClient
 @inject GameClient GameClient
 
-<PageTitle>Add New Game</PageTitle>
+<PageTitle>@title</PageTitle>
 
 @if(genres is null || game is null){
     <p><em>Loading...</em></p>
 }else{    
-  
+<h1>@title</h1>
 <EditForm Model="@game" FormName="AddNewGame" OnValidSubmit="HandleSubmit">
   <DataAnnotationsValidator />
 
@@ -58,12 +58,11 @@
     [Parameter]
     public int? Id { get; set;}
     [SupplyParameterFromForm]
-
-
     private GameDetails? game {get; set;}
     
     private Genre[]? genres;
 
+    private string title = string.Empty;
 protected override void OnParametersSet()
     {
       if(game is not null)
@@ -73,6 +72,7 @@ protected override void OnParametersSet()
       if(Id is not null)
       {
         game = GameClient.GetGame(Id.Value);
+        title = $"Edit {game.Name}";
       }
       else
       {
@@ -81,6 +81,7 @@ protected override void OnParametersSet()
         Name = string.Empty,
         ReleaseDate = DateOnly.FromDateTime(DateTime.UtcNow),
       };
+      title = "New Game...";
       }
     }    
     protected override void OnInitialized()
@@ -90,7 +91,16 @@ protected override void OnParametersSet()
        private void HandleSubmit()
     {
       ArgumentNullException.ThrowIfNull(game);
+      if(Id is null)
+      {
       GameClient.AddGame(game);
+      }
+      else
+      {
+        game.Id = Id.Value;
+        GameClient.UpdateGame(game);
+      }
+      ArgumentNullException.ThrowIfNull(game);
       NavigationManager.NavigateTo("/");
     }
 }
