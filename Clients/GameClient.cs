@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using GameStore.Models;
 
 namespace GameStore.Clients;
@@ -45,5 +46,21 @@ public class GameClient
         ReleaseDate = game.ReleaseDate,
     };
     games.Add(newGame);
+
+    }
+    public GameDetails EditGame(int id)
+    {
+        var game = games.Find(game=> game.Id == id);
+        ArgumentNullException.ThrowIfNull(game);
+        var genre = genres.Single(genre=> string.Equals(genre.Name, game.Genre, StringComparison.OrdinalIgnoreCase));
+        return new GameDetails
+        {
+            Id = game.Id,
+            Name = game.Name,
+            Price = game.Price,
+            ReleaseDate = game.ReleaseDate,
+            GenreId = genre.Id.ToString(),
+
+        };
     }
 }

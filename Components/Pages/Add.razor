@@ -11,7 +11,7 @@
   
 <EditForm Model="@game" FormName="AddNewGame" OnValidSubmit="HandleSubmit">
   <DataAnnotationsValidator />
-  
+
   <div class="form-group">
     <label for="game_name" class="form_label">Game Name</label>
     <InputText class="form-control" id="game_name" placeholder="Type Here..." @bind-Value="game.Name" />
@@ -42,11 +42,11 @@
 
 
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Save</button>
   <button
-  @* @onclick="HandleCancel" *@
   type="button" 
   class="btn btn-danger">Cancel</button>
+  <ValidationSummary />
 </EditForm>
 
 
