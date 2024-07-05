@@ -27,6 +27,13 @@ public class GameClient
         Price=40,
         Genre="Adventure",
         ReleaseDate= new DateOnly(2021, 10, 6)
+    },
+    new(){
+        Id=4,
+        Name="Game no.4",
+        Price=40,
+        Genre="Sifi",
+        ReleaseDate= new DateOnly(2021, 10, 6)
     }
     ];
     
