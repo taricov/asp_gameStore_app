@@ -43,7 +43,7 @@
 
 
 
-  <button type="submit" class="btn btn-primary">Save</button>
+  <button type="submit" class="btn btn-primary">@submitBtn</button>
   <button
   type="button" 
   class="btn btn-danger">Cancel</button>
@@ -63,6 +63,7 @@
     private Genre[]? genres;
 
     private string title = string.Empty;
+    private string submitBtn = "Save";
 protected override void OnParametersSet()
     {
       if(game is not null)
@@ -73,6 +74,7 @@ protected override void OnParametersSet()
       {
         game = GameClient.GetGame(Id.Value);
         title = $"Edit {game.Name}";
+        submitBtn = "Update";
       }
       else
       {

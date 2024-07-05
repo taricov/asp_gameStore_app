@@ -1,3 +1,4 @@
+using System.Data;
 using System.Security.Cryptography.X509Certificates;
 using GameStore.Models;
 
@@ -48,6 +49,12 @@ public class GameClient
 
     }
 
+
+    public void DeleteGame(int id)
+    {
+        GameSummary game = GetGameSummaryById(id);
+        games.Remove(game);
+    }
 
     public GameDetails GetGame(int id)
     {

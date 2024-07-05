@@ -5,7 +5,8 @@ using GameStore.Components;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorComponents();
+builder.Services.AddRazorComponents()
+                .AddInteractiveServerComponents();
 builder.Services.AddSingleton<GameSummary>();
 builder.Services.AddSingleton<GameClient>();
 builder.Services.AddSingleton<GenreClient>();
@@ -25,6 +26,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapRazorComponents<App>();
+app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 
 app.Run();
