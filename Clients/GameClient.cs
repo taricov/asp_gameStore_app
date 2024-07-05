@@ -1,5 +1,3 @@
-using System.Data;
-using System.Security.Cryptography.X509Certificates;
 using GameStore.Models;
 
 namespace GameStore.Clients;
@@ -36,12 +34,13 @@ public class GameClient
     private readonly Genre[] genres = new GenreClient().GetGenres();
     public void AddGame(GameDetails game)
     {
+    // ArgumentNullException.ThrowIfNull(game);
         GetGenreById(game.GenreId);
         var newGame = new GameSummary
         {
             Id = games.Count + 1,
             Name = game.Name,
-            Genre = game.GenreId,
+            Genre = game.GenreId ?? "",
             Price = game.Price,
             ReleaseDate = game.ReleaseDate,
         };
