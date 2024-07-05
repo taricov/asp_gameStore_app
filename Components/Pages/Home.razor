@@ -20,6 +20,7 @@ else
       <th scope="col">Genre</th>
       <th scope="col">Price</th>
       <th scope="col">Release Date</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +31,14 @@ else
       <td>@game.Genre</td>
       <td>@game.Price</td>
       <td>@game.ReleaseDate</td>
+      <td>
+        <a class="btn btn-primary" href="@GameUrl(game)" role="button">
+        <i class="bi bi-pencil-fill"></i>
+        </a>
+        <button class="btn btn-danger">
+        <i class="bi bi-trash3-fill"></i>
+        </button>
+      </td>
     </tr>
     }
   </tbody>
@@ -43,4 +52,5 @@ else
     {
         games = Client.GetGames();
     }
+    private static string GameUrl(GameSummary game) => $"/add/{game.Id}";
 }
